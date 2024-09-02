@@ -1,0 +1,345 @@
+/* .produkTitle {
+  font-family: Garamond, serif;
+  font-size: 35px;
+  text-align: justify;
+}
+
+.cardImages {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+} */
+/* body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+  background-color: #f1f1f1;
+} */
+/* .container {
+  width: 1000px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+}
+.container .card {
+  position: relative;
+  border-radius: 10px;
+}
+
+.container .card .icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #f00;
+  transition: 0.7s;
+  z-index: 1;
+} */
+
+/* .menuGallery {
+  background-color: #21a2aa;
+  height: 45px;
+  margin: auto;
+  border: 1px;
+  border-radius: 25px;
+}
+.custom-Btgallery {
+  background-color: #21a2aa;
+  margin: auto;
+  border-radius: 50px;
+  width: 213px;
+  height: 40px;
+}
+.custom-Btgallery p {
+  color: #ffffff;
+  padding-top: 5px;
+  text-align: center;
+  font-weight: 400;
+  font-size: 20px;
+} */
+/* ------------------- BANNER ------------------ */
+.pr-container-fluid .textP {
+  text-align: center;
+  letter-spacing: 3px;
+  padding-top: 100px;
+  font-size: 32px;
+  font-weight: bold;
+}
+.pr-container-fluid .textSpan {
+  text-align: center;
+  font-weight: 400;
+}
+.pr-container-fluid .line-bottom {
+  background-color: #001c1d;
+  width: 100px;
+  height: 1px;
+  margin: auto;
+}
+.logoBannerPosisi {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logoBanner {
+  max-width: 400px;
+}
+.textPosisi {
+  display: flex;
+  align-items: flex-end;
+  line-height: 1;
+}
+.image-text {
+  color: #00588a;
+  text-shadow: 1px 1px 2px #00f7ff, 0 0 0 0px #001c1d, 0 0 5px #ffffff;
+  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; */
+
+  font-size: 3em;
+  font-weight: bold;
+}
+.image-text2 {
+  color: #21a2aa;
+  text-shadow: 1px 1px 2px #ffffff, 0 0 25px #ffffff, 0 0 5px #ffffff;
+  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; */
+  font-size: 2.5em;
+  font-weight: bold;
+}
+.image-text3 {
+  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; */
+  font-size: 24px;
+}
+/* ------------------- AKHIR BANNER ------------------ */
+
+.containerPR .card:nth-child(1) .icon {
+  background: #e07768;
+  background: #225ab1;
+}
+
+.containerPR .card:nth-child(2) .icon {
+  background: #6eadd4;
+}
+
+.containerPR .card:nth-child(3) .icon {
+  background: #4aada9;
+}
+
+.containerPR .card .icon .fa {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 80px;
+  transition: 0.7s;
+  color: #fff;
+}
+
+.containerPR img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 80px;
+  transition: 0.7s;
+  color: #fff;
+}
+
+.containerPR .card .face {
+  width: 300px;
+  height: 200px;
+  transition: 0.5s;
+}
+
+.containerPR .card .face.face1 {
+  position: relative;
+  background: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  transform: translateY(100px);
+}
+
+.containerPR .card:hover .face.face1 {
+  background: #ff0057;
+  transform: translateY(0px);
+}
+
+.containerPR .card .face.face1 .content {
+  opacity: 1;
+  transition: 0.5s;
+}
+
+.containerPR .card:hover .face.face1 .content {
+  opacity: 1;
+}
+
+.containerPR .card .face.face1 .content i {
+  max-width: 100px;
+}
+
+.containerPR .card .face.face2 {
+  position: relative;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+  transform: translateY(-100px);
+}
+
+.containerPR .card:hover .face.face2 {
+  transform: translateY(0);
+}
+
+.containerPR .card .face.face2 .content p {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  color: #414141;
+  font-size: 15px;
+}
+
+.containerPR .card .face.face2 .content h3 {
+  margin: 0 0 10px 0;
+  padding: 0;
+  color: #fff;
+  font-size: 24px;
+  text-align: center;
+  color: #414141;
+}
+
+.containerPR a {
+  text-decoration: none;
+  color: #414141;
+}
+
+:root {
+  --surface-color: #fff;
+  --curve: 40;
+}
+
+/* * {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Noto Sans JP", sans-serif;
+  background-color: #fef8f8;
+} */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 4rem 5vw;
+  padding: 0;
+  list-style-type: none;
+}
+
+/* .card {
+  position: relative;
+  display: block;
+  height: 100%;
+  border-radius: calc(var(--curve) * 1px);
+  overflow: hidden;
+  text-decoration: none;
+} */
+
+.card__image {
+  width: 100%;
+  height: auto;
+}
+
+.card__overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  border-radius: calc(var(--curve) * 1px);
+  background-color: var(--surface-color);
+  transform: translateY(100%);
+  transition: 0.2s ease-in-out;
+}
+
+.card:hover .card__overlay {
+  transform: translateY(0);
+}
+
+.card__header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 2em;
+  padding: 2em;
+  border-radius: calc(var(--curve) * 1px) 0 0 0;
+  background-color: var(--surface-color);
+  transform: translateY(-100%);
+  transition: 0.2s ease-in-out;
+}
+
+.card__arc {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  z-index: 1;
+}
+
+.card__arc path {
+  fill: var(--surface-color);
+  d: path("M 40 80 c 22 0 40 -22 40 -40 v 40 Z");
+}
+
+.card:hover .card__header {
+  transform: translateY(0);
+}
+
+.card__thumb {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.card__title {
+  font-size: 1em;
+  margin: 0 0 0.3em;
+  color: #6a515e;
+}
+
+.card__tagline {
+  display: block;
+  margin: 1em 0;
+  font-family: "MockFlowFont";
+  font-size: 0.8em;
+  color: #d7bdca;
+}
+
+.card__status {
+  font-size: 0.8em;
+  color: #d7bdca;
+}
+
+.card__description {
+  padding: 0 2em 2em;
+  margin: 0;
+  color: #d7bdca;
+  font-family: "MockFlowFont";
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.button-list-product {
+  background-color: #00afb2 !important;
+}

@@ -1,0 +1,298 @@
+:root {
+  --white-color: #ffffff;
+  --black-color: #000000;
+  --primary-blue: #1e88e5;
+  --primary-yellow: #ffd026;
+  --primary-green: #16a75c;
+  --primary-gray: #616161;
+  --secondary-color-blue: #1565c0;
+  --secondary-color-yellow: #ffda4f;
+  --secondary-color-green: #70cd94;
+  --secondary-color-gray: #bdbdbd;
+  --section-bg-color: #f0f8ff;
+  --custom-btn-bg-color: #008444;
+  --custom-btn-bg-hover-color: #1565c0;
+  --dark-color: #000000;
+  --p-color-black: #000000;
+  --p-color-white: #ffffff;
+  --border-color: #1e88e5;
+  --link-hover-color: #1e88e5;
+
+  --background-color-gray: #fafafa;
+
+  --body-font-family: "Montserrat-Regular", sans-serif;
+  --title-font-family: "Lato-Regular", sans-serif;
+
+  --h1-font-size: 58px;
+  --h2-font-size: 48px;
+  --h3-font-size: 32px;
+  --h4-font-size: 28px;
+  --h5-font-size: 24px;
+  --h6-font-size: 21px;
+  --p-font-size: 19px;
+  --p-font-size-second: 14px;
+  --menu-font-size: 17px;
+  --btn-font-size: 18px;
+  --copyright-font-size: 16px;
+
+  --border-radius-large: 100px;
+  --border-radius-medium: 20px;
+  --border-radius-small: 10px;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+}
+
+@media screen and (max-width: 480px) {
+  .about {
+    width: 90%;
+    height: 450px;
+    padding: 15px 15px;
+  }
+  .figure img {
+    max-width: 150px;
+    height: 100px;
+    position: absolute;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+  }
+  .about .titlepage h2 {
+    font-size: 32px;
+    text-align: center;
+  }
+  .about .titlepage h2::before {
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .about .titlepage p {
+    font-size: 15px;
+    margin-top: -15px;
+    margin-bottom: 50px;
+  }
+  .online_box_left,
+  .online_box_left2 {
+    margin: 5px;
+    padding: 15px;
+    font-size: 16px;
+  }
+  .gallery-col {
+    padding: 10px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .about {
+    width: 80%;
+  }
+  .online_box {
+    flex-direction: column;
+    width: 100%;
+  }
+  .online_box_main {
+    width: 100%;
+    display: flex;
+  }
+  .online_box_left {
+    width: 100%;
+  }
+  .gallery-col {
+    padding: 10px;
+  }
+  .appoinment_text {
+    padding: 10px;
+    width: 100%;
+    font-size: 16px;
+    color: #001431;
+    text-align: center;
+    font-weight: bold;
+  }
+  .right_arrow {
+    width: 40%;
+    margin-left: 30px;
+  }
+  .box_left,
+  .box_right {
+    width: 100%;
+  }
+  .box-sejarah {
+    width: 95%;
+    max-height: 100vh;
+  }
+  .box-sejarah img {
+    width: 100%;
+    height: 50vh;
+    margin: auto;
+    position: relative;
+  }
+
+  .tag-new-news {
+    font-family: "Montserrat-Bold";
+    font-size: 1.5rem;
+  }
+
+  .card-side-programs {
+    margin-top: 1vh;
+    margin-left: 1vw;
+    margin-right: 1vw;
+  }
+  .pagination-news {
+    justify-content: center;
+  }
+
+  .pagination-news li {
+    margin: 0 5px; /* Menambahkan jarak horizontal antara setiap elemen pagination */
+  }
+
+  .news-card-skeleton {
+    min-width: 270px;
+    min-height: 400px;
+    border-radius: 4px;
+  }
+  .card-news-home {
+    max-height: 800px;
+  }
+
+  .card-body-news-home {
+    padding: 1rem;
+  }
+
+  .title-news-home {
+    font-size: var(--h6-font-size) !important;
+    color: var(--primary-blue);
+  }
+
+  .btn-selengkapnya {
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+    position: relative;
+    font-size: 10px !important;
+  }
+  .c-body-berita-terkini {
+    min-height: 25rem;
+  }
+
+  .c-body-berita-terkini .c-head-berita-terkini {
+    min-height: 220px;
+  }
+
+  .c-body-berita-terkini .c-head-berita-terkini p {
+    font-size: 14px;
+  }
+  .c-body-berita-terkini .c-head-berita-terkini h4 {
+    font-size: 16px;
+  }
+  .text__details {
+    display: flex;
+  }
+
+  .text__detail__tag {
+    font-size: 10px !important ;
+  }
+  .text__detail {
+    font-size: 10px !important;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+  }
+  .btn-custom-home {
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+  }
+
+  .banner-container-home {
+    height: 660px;
+  }
+
+  .banner-content {
+    top: -10px;
+
+    .banner-title {
+      font-size: 19px;
+    }
+
+    .banner-subtitle {
+      margin-top: 8px;
+      font-size: 14px;
+      margin-bottom: -20px;
+    }
+    .banner-search-caption {
+      font-size: 12px;
+    }
+    .banner-search-content {
+      margin-top: 50px;
+
+      .input-custom {
+        font-size: 12px;
+        font-weight: var(--font-weight-bold);
+      }
+    }
+    .banner-search-popular {
+      font-size: 14px;
+    }
+  }
+  .carousel-profil {
+    margin: -10px;
+    top: -150px
+  }
+
+  .carousel-profil img {
+    max-width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+  }
+
+  .prev-carousel-profil,
+  .next-carousel-profil {
+    z-index: 99;
+  }
+
+  .a-box-profil {
+    width: 300px;
+    height: 650px;
+  }
+
+  .img-container-profil img {
+    margin: 150px 100px 0px 0px;
+    width: 200px;
+    height: 300px;
+    object-fit: contain;
+  }
+
+  .text-container-profil h3 {
+    font-size: 14px;
+  }
+  .accordion-body-profil ol {
+  margin-left: -50px;
+  }
+  .custom-text h6 {
+    list-style-type: none;
+    font-size: var(--p-font-size-second);
+    text-align: justify;
+  }
+  .custom-text h4 {
+    list-style-type: none;
+    font-size: var(--p-font-size);
+    text-align: justify;
+  }
+
+}
+
+/* Media query untuk tampilan layar laptop (ukuran > 1024px) */
+@media (min-width: 1024px) {
+  .container {
+    /* padding: 40px; */
+    font-family: "Montserrat-Regular" !important;
+  }
+}
+
+/* Aturan gaya tambahan untuk tampilan laptop */
+@media (min-width: 1024px) {
+  .header {
+    font-size: 24px;
+  }
+}

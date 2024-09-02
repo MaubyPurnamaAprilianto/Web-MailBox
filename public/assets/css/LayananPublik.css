@@ -1,0 +1,339 @@
+:root {
+  --white-color: #ffffff;
+  --black-color: #000000;
+  --primary-blue: #1e88e5;
+  --primary-yellow: #ffd026;
+  --primary-green: #16a75c;
+  --primary-gray: #616161;
+  --secondary-color-blue: #1565c0;
+  --secondary-color-yellow: #ffda4f;
+  --secondary-color-green: #70cd94;
+  --secondary-color-gray: #bdbdbd;
+  --section-bg-color: #f0f8ff;
+  --custom-btn-bg-color: #008444;
+  --custom-btn-bg-hover-color: #1565c0;
+  --dark-color: #000000;
+  --p-color-black: #000000;
+  --p-color-white: #ffffff;
+  --border-color: #1e88e5;
+  --link-hover-color: #1e88e5;
+
+  --background-color-gray: #fafafa;
+
+  --body-font-family: "Montserrat-Regular", sans-serif;
+  --title-font-family: "Lato-Regular", sans-serif;
+
+  --h1-font-size: 58px;
+  --h2-font-size: 48px;
+  --h3-font-size: 32px;
+  --h4-font-size: 28px;
+  --h5-font-size: 24px;
+  --h6-font-size: 21px;
+  --p-font-size: 19px;
+  --p-font-size-second: 14px;
+  --menu-font-size: 17px;
+  --btn-font-size: 18px;
+  --copyright-font-size: 16px;
+
+  --border-radius-large: 100px;
+  --border-radius-medium: 20px;
+  --border-radius-small: 10px;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+}
+
+
+.most-played {
+  padding: 50px 0px;
+  border-radius: 150px;
+}
+.profile {
+  position: relative;
+  background: var(--white-color);
+  border-radius: 10px;
+  transition: 0.2s ease;
+  height: 250px;
+  margin-bottom: 80px;
+}
+.profile .profile-item {
+  width: 300px;
+}
+.profile-item .profile-smallimg {
+  border-radius: 10px;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 10px;
+}
+.profile-smallimg .profile__image {
+  margin-top: -40px;
+  display: flex;
+  justify-content: center;
+}
+.profile__border {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 5px solid var(--primary-blue);
+  background-color: var(--section-bg-color);
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.profile-smallimg .profile__info {
+  margin: 10px 30px 15px;
+}
+.profile__info h5 {
+  font-size: var(--h5-font-size);
+  font-weight: var(--font-weight-bold);
+}
+.profile__info h6 {
+  font-size: var(--h6-font-size);
+  font-weight: var(--font-weight-bold);
+}
+.profile__info p {
+  font-size: var(--menu-font-size);
+  font-weight: var(--font-weight-medium);
+  text-align: justify;
+}
+.profile-logo {
+  position: relative;
+  background: var(--white-color);
+  border-radius: 10px;
+  transition: 0.2s ease;
+  height: 250px;
+  margin-bottom: 80px;
+}
+.profile-logo .profile-item-logo {
+  width: 300px;
+  height: 100%;
+}
+.profile__border__logo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+.profile__logo p {
+  font-size: var(--p-font-size-second);
+  font-weight: var(--font-weight-medium);
+  text-align: justify;
+}
+.profile__logo h5 {
+  font-size: var(--menu-font-size);
+  font-weight: var(--font-weight-bold);
+  text-align: justify;
+}
+.profile-smallimg .profile__cta {
+  border-radius: 0 0 10px 10px;
+  color: var(--white-color);
+}
+
+.profile-smallimg .profile__cta .button {
+  position: absolute;
+  display: inline-block;
+  text-align: center;
+  line-height: 40px;
+  height: 40px;
+  padding: 0px 15px;
+  background-color: var(--primary-blue);
+  color: var(--white-color);
+  border-radius: 20px;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: 600;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -20px;
+
+  cursor: pointer;
+}
+
+.profile-smallimg .profile__cta .button:hover {
+  background-color: var(--primary-yellow);
+  color: var(--black-color);
+}
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+th,
+td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+tr {
+  transition: background-color 0.3s ease;
+}
+
+tr:hover {
+  background-color: #f5f5f5;
+}
+
+/* Gaya untuk pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination li {
+  margin: 0 5px;
+  list-style: none;
+  cursor: pointer;
+}
+
+.pagination li.active {
+  font-weight: bold;
+}
+.pagination .page-item.active .page-link {
+  background-color: var(--primary-green);
+  border-color: var(--primary-green);
+}
+
+th .fa-sort,
+th .fa-sort-up,
+th .fa-sort-down {
+  margin-left: 5px;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: border-color 0.2s ease;
+}
+
+input[type="text"]:focus {
+  border-color: #007bff;
+  outline: none;
+}
+.btn-primary-custom {
+  background-color: var(--primary-blue) !important;
+  box-shadow: none;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* CSS untuk hover tombol */
+.btn-primary-custom:hover {
+  background-color: var(--primary-blue);
+  box-shadow: none;
+  color: #fff;
+}
+
+/* CSS untuk tombol aktif (klik) */
+.btn-primary-custom:active {
+  background-color: var(
+    --primary-blue
+  ); /* Warna latar belakang saat tombol ditekan */
+  box-shadow: none !important;
+}
+
+.btn-primary-custom:focus {
+  background-color: var(
+    --primary-blue
+  ); /* Warna latar belakang saat tombol ditekan */
+  box-shadow: none !important;
+}
+@media (max-width: 767px) {
+  .profile-logo {
+
+    height: 550px;
+ 
+  }
+  .profile-logo .profile-item-logo {
+    width: 300px;
+  }
+}
+/* @media (max-width: 767px) {
+  .most-played {
+    padding: 10px 10px;
+  }
+  .profile {
+    padding: 10px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+  }
+
+  .profile .profile-item {
+    width: 300px;
+  }
+
+  .profile-smallimg {
+    text-align: center;
+    display: block;
+  }
+  .profile-smallimg .profile__cta {
+    border-radius: 0 0 10px 10px;
+    color: var(--white-color);
+    margin-top: 10px;
+  }
+
+  .profile-smallimg .profile__image img {
+    margin-top: 0; 
+    width: 100px; 
+    height: 100px; 
+  }
+
+  .profile-smallimg .profile__cta a.button {
+    width: 100%;
+    padding: 15px;
+    font-size: 14px;
+  }
+  .profile-smallimg .profile__cta a.button {
+    position: absolute;
+    display: inline-block;
+    text-align: center;
+    line-height: 40px;
+    height: 40px;
+    padding: 0px 15px;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 600;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -15px;
+    width: 50%;
+    cursor: pointer;
+  }
+} */
+
+@media (max-width: 767px) {
+  .pagination-container-mobile {
+    display: block; /* Tampilkan pagination sebagai blok di perangkat mobile */
+  }
+}
+/* Menghilangkan pagination dari tampilan web (lebar layar >= 768px) */
+@media (min-width: 768px) {
+  .pagination-container-mobile {
+    display: none; /* Sembunyikan pagination di tampilan web */
+  }
+}
