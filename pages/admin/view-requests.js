@@ -21,7 +21,7 @@ export default function ViewRequests() {
       }
 
       try {
-        const response = await axios.get("http://localhost:5001/admin/requests", {
+        const response = await axios.get("https://gqk2bgt5-5001.asse.devtunnels.ms/admin/requests", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setRequests(response.data);
@@ -48,25 +48,25 @@ export default function ViewRequests() {
         </div>
 
         {loading ? (
-          <div className="text-center">
-            <p className="text-gray-600">Loading...</p>
+          <div className="flex justify-center items-center h-64">
+            <div className="border-gray-300 h-10 w-10 animate-spin rounded-full border-8 border-t-blue-600" />
           </div>
         ) : requests.length === 0 ? (
           <div className="text-center text-gray-600">
             No requests found.
           </div>
         ) : (
-          <div className="bg-white shadow overflow-auto rounded">
+          <div className="bg-white shadow overflow-auto rounded max-h-96">
             <div className="max-w-4xl">
-              <table className="table-auto w-full">
-                <thead className="bg-indigo-600 text-white">
+              <table className="table-auto w-full shadow-lg">
+                <thead className="bg-indigo-600 text-white sticky top-0 z-10">
                   <tr>
                     {[
-                      "No", "Nama", "NIK", "Upload Photo KTP", "Nomor Pengesahan",
-                      "Alamat", "Pekerjaan", "No HP", "Email", "Rincian Informasi",
-                      "Tujuan Permohonan Informasi", "Cara Memperoleh Informasi", 
-                      "Mendapatkan Salinan Informasi", "Cara Mendapatkan Salinan Informasi",
-                      "Status", "Tracking Code", "File URL", "Tanggal", "Action"
+                      "No", "Nama", "NIK", "Upload Photo KTP", "Nomor Pengesahan", "Alamat", "Pekerjaan",
+                      "No HP", "Email", "Rincian Informasi", "Tujuan Permohonan Informasi",
+                      "Cara Memperoleh Informasi", "Mendapatkan Salinan Informasi",
+                      "Cara Mendapatkan Salinan Informasi", "Status", "Tracking Code",
+                      "File URL", "Tanggal", "Action"
                     ].map((header, index) => (
                       <th
                         key={index}
@@ -77,7 +77,7 @@ export default function ViewRequests() {
                     ))}
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+                <tbody className="bg-white">
                   {requests.map((request, index) => (
                     <tr
                       key={`${request.id}-${request.trackingCode}`}
@@ -112,7 +112,7 @@ export default function ViewRequests() {
               </table>
             </div>
           </div>
-        )}  
+        )}
       </div>
     </div>
   );

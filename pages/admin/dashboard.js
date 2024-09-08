@@ -1,84 +1,86 @@
-  import { useEffect } from "react";
-  import { useRouter } from "next/router";
-  import Sidebar from "../../components/sidebar/Sidebar";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+import Sidebar from "../../components/sidebar/Sidebar";
+import WeeklyRequestChart from "../../components/chart/WeeklyRequestChart"; // Import Chart
 
-  export default function Dashboard() {
-    const router = useRouter();
+export default function Dashboard() {
+  const router = useRouter();
 
-    useEffect(() => {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        router.push("/admin/login");
-      }
-    }, [router]);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      router.push("/admin/login");
+    }
+  }, [router]);
 
-    return (
-      <div className="flex">
-        {/* Sidebar */}
-        <Sidebar />
-        {/* Main Content */}
-        <div className="relative ml-64 mt-16 flex-1 h-auto bg-gray-100">
-          {/* Header */}
-          <div className="p-8 h-64 bg-gradient-to-r from-[#2F93F5] to-[#0A4A89] relative">
-            <div className="absolute top-0 right-0 mt-4 mr-4">
-              <i className="fas fa-user-circle text-white text-3xl"></i>
-            </div>
-            <h1 className="text-2xl font-bold mb-2 text-white">Dashboard</h1>
-            <p className="text-white">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </p>
+  return (
+    <div className="flex">
+      {/* Sidebar */}
+      <Sidebar />
+
+      {/* Main Content */}
+      <div className="relative ml-64 mt-16 flex-1 h-auto bg-gray-100">
+        {/* Header */}
+        <div className="p-8 h-32 bg-gradient-to-r from-[#2F93F5] to-[#0A4A89] relative"> 
+          <div className="absolute top-0 right-0 mt-4 mr-4">
+            <i className="fas fa-user-circle text-white text-3xl"></i>
+          </div>
+          <h1 className="text-2xl font-bold mb-2 text-white">Dashboard</h1>
+          <p className="text-white">Layanan Permohonan Data Online</p>
+        </div>
+
+        {/* Main Section */}
+        <div className="p-8 space-y-8">
+
+          {/* Kotak terpisah untuk Chart */}
+          <div className="bg-white shadow-lg rounded-lg p-6">
+              <WeeklyRequestChart />
           </div>
 
-          {/* Main Section */}
-          <div className="relative p-8 grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-            {/* Diagram 1 */}
-            <div className="bg-white shadow-lg rounded-lg p-6 relative -mt-48 z-10">
-              <h2 className="text-xl font-bold mb-4">Diagram 1</h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              <div className="mt-4 h-32 bg-gray-100 rounded-lg flex items-center justify-center">
-                <span className="text-gray-400">[Diagram Placeholder]</span>
-              </div>
-            </div>
-
-            {/* Diagram 2 */}
-            <div className="bg-white shadow-lg rounded-lg p-6 lg:-mt-48 mt-0 relative z-10">
-              <h2 className="text-xl font-bold mb-4">Diagram 2</h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              <div className="mt-4 h-32 bg-gray-100 rounded-lg flex items-center justify-center">
-                <span className="text-gray-400">[Diagram Placeholder]</span>
-              </div>
-            </div>
-
-            {/* Statistics Section */}
+          {/* Grid untuk Request Rata-rata & Notifikasi Request */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
+            {/* Kotak terpisah untuk Request Rata-rata */}
             <div className="bg-white shadow-lg rounded-lg p-6">
-              <div className="flex justify-between items-center">
-                <div className="flex items-center space-x-4">
-                  <div className="text-center">
-                    <div className="text-green-500 text-2xl font-bold">15</div>
-                    <div className="text-sm text-gray-500">Label 1</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-red-500 text-2xl font-bold">21</div>
-                    <div className="text-sm text-gray-500">Label 2</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-yellow-500 text-2xl font-bold">31</div>
-                    <div className="text-sm text-gray-500">Label 3</div>
-                  </div>
-                </div>
-              </div>
+              <h2 className="text-xl font-bold mb-4 text-gray-800">Request Rata-rata</h2>
+              <table className="min-w-full bg-gray-50">
+                <thead>
+                  <tr>
+                    <th className="py-2 text-gray-700">Nomor KTP</th>
+                    <th className="py-2 text-gray-700">Nama</th>
+                    <th className="py-2 text-gray-700">No HP</th>
+                    <th className="py-2 text-gray-700">Keperluan</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="py-2 text-gray-600">1123441314</td>
+                    <td className="py-2 text-gray-600">Adi 123</td>
+                    <td className="py-2 text-gray-600">082119982828</td>
+                    <td className="py-2 text-gray-600">Data Alumni</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
 
-            {/* Diagram 3 */}
+            {/* Kotak terpisah untuk Notifikasi Request */}
             <div className="bg-white shadow-lg rounded-lg p-6">
-              <h2 className="text-xl font-bold mb-4">Diagram 3</h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              <div className="mt-4 h-32 bg-gray-100 rounded-lg flex items-center justify-center">
-                <span className="text-gray-400">[Diagram Placeholder]</span>
-              </div>
+              <h2 className="text-xl font-bold mb-4 text-gray-800">Notifikasi Request</h2>
+              <ul>
+                {Array(4).fill().map((_, index) => (
+                  <li key={index} className="flex items-center justify-between py-2 text-gray-600">
+                    <span>Adi</span>
+                    <span>adi@gmail.com</span>
+                    <i className="fas fa-external-link-alt"></i>
+                  </li>
+                ))}
+              </ul>
             </div>
+
           </div>
+
         </div>
       </div>
-    );
-  }
+    </div>
+  );
+}

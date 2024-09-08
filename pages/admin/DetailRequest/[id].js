@@ -31,7 +31,7 @@ const DetailRequest = () => {
 
         try {
           const response = await axios.get(
-            `http://localhost:5001/admin/getrequests/${id}`,
+            `https://gqk2bgt5-5001.asse.devtunnels.ms/admin/getrequests/${id}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -63,8 +63,8 @@ const DetailRequest = () => {
     try {
       const url =
         status === "Rejected"
-          ? `http://localhost:5001/admin/delete-request/${id}`
-          : `http://localhost:5001/admin/update-status/${id}`;
+          ? `https://gqk2bgt5-5001.asse.devtunnels.ms/admin/delete-request/${id}`
+          : `https://gqk2bgt5-5001.asse.devtunnels.ms/admin/update-status/${id}`;
       const method = status === "Rejected" ? "DELETE" : "PUT";
 
       await axios({

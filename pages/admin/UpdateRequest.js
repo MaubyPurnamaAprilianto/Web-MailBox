@@ -18,7 +18,7 @@ const UpdateRequest = () => {
       const formData = new FormData();
       formData.append("file", file);
       const response = await axios.post(
-        "http://localhost:5001/admin/process",
+        "https://gqk2bgt5-5001.asse.devtunnels.ms/admin/process",
         formData
       );
       console.log(response.data);

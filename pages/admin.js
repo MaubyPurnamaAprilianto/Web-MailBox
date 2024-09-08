@@ -13,7 +13,7 @@ export default function AdminDashboard() {
     // Fetch all requests
     const fetchRequests = async () => {
       try {
-        const response = await axios.get('http://localhost:5001/admin/requests');
+        const response = await axios.get('https://gqk2bgt5-5001.asse.devtunnels.ms/admin/requests');
         setRequests(response.data);
       } catch (err) {
         console.error(err);
@@ -27,7 +27,7 @@ export default function AdminDashboard() {
   const handleProcessRequest = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5001/admin/process', {
+      await axios.post('https://gqk2bgt5-5001.asse.devtunnels.ms/admin/process', {
         trackingCode: selectedRequest.trackingCode,
         status,
         fileUrl,

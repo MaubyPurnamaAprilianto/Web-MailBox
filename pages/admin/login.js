@@ -3,28 +3,32 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import LogoFixColor from "../../public/assets/logo-apps/Logo-fix-full-color.png";
-import { FaHome } from "react-icons/fa";
+import LoginSVG from "../../public/svg/login.svg";
+import NProgress from "nprogress"; // Import NProgress
+import "nprogress/nprogress.css"; // Import NProgress styles
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // State untuk mengatur visibility password
   const [error, setError] = useState("");
   const router = useRouter();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    
+    // Mulai progress bar saat login dimulai
+    NProgress.start();
+
     try {
-      const response = await axios.post("http://localhost:5001/admin/login", {
-        email,
-        password,
-      });
-      const { token } = response.data;
-      localStorage.setItem("authToken", token);
-      alert("Login successful!");
-      router.push("/admin/dashboard");
-    } catch (error) {
-      setError(error.response?.data?.error || "Invalid email or password.");
-      console.error("Error during login:", error);
+      const response = await axios.post('https://gqk2bgt5-5001.asse.devtunnels.ms/admin/login', { email, password });
+      localStorage.setItem('token', response.data.token);
+      router.push('/admin/dashboard');
+    } catch (err) {
+      setError(err.response?.data?.error || 'Terjadi kesalahan!');
+    } finally {
+      // Hentikan progress bar setelah login selesai
+      NProgress.done();
     }
   };
 
@@ -47,11 +51,11 @@ const Login = () => {
                 Aplikasi Terintegrasi Pendidikan
               </p>
               <p className="text-xs text-gray-400">
-                Satu Login Untuk Semua Aplikasi Dinas Pendidikan Provinsi Jawa
-                Barat
+                Login Untuk Mengakses Halaman Admin Web 
+                LDPO
               </p>
             </div>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleLogin}>
               <div className="mb-4">
                 <label
                   className="block text-gray-700 font-medium mb-2"
@@ -79,7 +83,7 @@ const Login = () => {
                 <div className="relative">
                   <input
                     className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-500"
-                    type="password"
+                    type={showPassword ? "text" : "password"} 
                     id="password"
                     placeholder="Masukkan Password"
                     value={password}
@@ -87,22 +91,45 @@ const Login = () => {
                     required
                   />
                   <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
-                    <svg
-                      className="h-5 w-5 text-gray-400"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)} 
+                      className="focus:outline-none"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M15 12m-3 3a9 9 0 00-9-9m18 9a9 9 0 01-9 9m-6-9a6 6 0 1112 0m-9-9a6 6 0 019 9"
-                      />
-                    </svg>
+                      {showPassword ? (
+                        <svg
+                          className="h-5 w-5 text-gray-600"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M15 12m-3 3a9 9 0 00-9-9m18 9a9 9 0 01-9 9m-6-9a6 6 0 1112 0m-9-9a6 6 0 019 9"
+                          />
+                        </svg>
+                      ) : (
+                        <svg
+                          className="h-5 w-5 text-gray-400"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M15 12m-3-3a9 9 0 000 6m6-3a9 9 0 000-6m-9-9a6 6 0 000 12m12 0a6 6 0 000-12"
+                          />
+                        </svg>
+                      )}
+                    </button>
                   </div>
                 </div>
               </div>
+              {error && <p className="text-red-500 text-xs mb-4">{error}</p>}
               <button
                 className="w-full bg-blue-500 text-white p-3 rounded-lg font-medium hover:bg-blue-600"
                 type="submit"
@@ -115,16 +142,8 @@ const Login = () => {
             </p>
           </div>
           {/* Right Side */}
-          <div className="hidden md:block md:w-1/2 bg-blue-500 text-white p-8">
-            <div className="h-full flex flex-col justify-center items-center">
-              {/* <Image
-                src={loginImage}
-                alt="Login Image"
-                width={400}
-                height={300}
-              /> */}
-              {/* Sesuaikan dengan gambar yang sesuai */}
-            </div>
+          <div className="hidden md:block w-1/2 bg-blue-500 p-8 flex items-center justify-center">
+            <Image src={LoginSVG} alt="Login Illustration" width={500} height={500} />
           </div>
         </div>
       </div>
