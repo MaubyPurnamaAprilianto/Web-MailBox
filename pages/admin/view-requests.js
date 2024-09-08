@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import Image from "next/image";
 import axios from "axios";
 import moment from "moment";
 import Sidebar from "@/components/sidebar/Sidebar";
@@ -86,7 +87,9 @@ export default function ViewRequests() {
                       <td className="px-4 py-2 text-sm font-medium text-gray-900">{index + 1}</td>
                       <td className="px-4 py-2 text-sm text-gray-500">{request.name}</td>
                       <td className="px-4 py-2 text-sm text-gray-500">{request.nik}</td>
-                      <td className="px-4 py-2 text-sm text-gray-500 truncate">{request.uploadPhotoKTP}</td>
+                      <td className="px-4 py-2 text-sm text-gray-500 truncate">
+                        <Image src={`http://10.10.10.53:5001/getImage/${request.uploadPhotoKTP}`} alt="KTP" width={100} height={100} />
+                      </td>
                       <td className="px-4 py-2 text-sm text-gray-500 truncate">{request.nomorPengesahan}</td>
                       <td className="px-4 py-2 text-sm text-gray-500 truncate">{request.alamat}</td>
                       <td className="px-4 py-2 text-sm text-gray-500 truncate">{request.pekerjaan}</td>
