@@ -118,9 +118,9 @@ const DetailRequest = () => {
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col items-center">
               <div className="w-72 h-40 bg-gray-300 rounded-lg overflow-hidden">
-                {/* {request.uploadPhotoKTP ? (
+                {request.uploadPhotoKTP ? (
                   <Image
-                    src={request.uploadPhotoKTP}
+                    src={`http://10.10.10.53:5001/getImage/${request.uploadPhotoKTP}`}
                     alt="KTP Image"
                     layout="responsive"
                     width={224}
@@ -134,7 +134,7 @@ const DetailRequest = () => {
                     width={224}
                     height={144}
                   />
-                )} */}
+                )}
               </div>
             </div>
             <div className="flex flex-col justify-center">

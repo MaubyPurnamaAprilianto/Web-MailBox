@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import Sidebar from "../../components/sidebar/Sidebar";
-import WeeklyRequestChart from "../../components/chart/WeeklyRequestChart"; // Import Chart
+import WeeklyRequestChart from "../../components/chart/WeeklyRequestChart"; // Import WeeklyRequestChart
+import RequestStatusChart from "../../components/chart/RequestStatusChart"; // Import RequestStatusChart
 
 export default function Dashboard() {
   const router = useRouter();
@@ -40,27 +41,10 @@ export default function Dashboard() {
           {/* Grid untuk Request Rata-rata & Notifikasi Request */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             
-            {/* Kotak terpisah untuk Request Rata-rata */}
+            {/* Kotak terpisah untuk Request Rata-rata diubah menjadi Chart Bulat */}
             <div className="bg-white shadow-lg rounded-lg p-6">
-              <h2 className="text-xl font-bold mb-4 text-gray-800">Request Rata-rata</h2>
-              <table className="min-w-full bg-gray-50">
-                <thead>
-                  <tr>
-                    <th className="py-2 text-gray-700">Nomor KTP</th>
-                    <th className="py-2 text-gray-700">Nama</th>
-                    <th className="py-2 text-gray-700">No HP</th>
-                    <th className="py-2 text-gray-700">Keperluan</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="py-2 text-gray-600">1123441314</td>
-                    <td className="py-2 text-gray-600">Adi 123</td>
-                    <td className="py-2 text-gray-600">082119982828</td>
-                    <td className="py-2 text-gray-600">Data Alumni</td>
-                  </tr>
-                </tbody>
-              </table>
+              <h2 className="text-xl font-bold mb-4 text-gray-800">Status Request</h2>
+              <RequestStatusChart />
             </div>
 
             {/* Kotak terpisah untuk Notifikasi Request */}
