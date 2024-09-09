@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import Image from "next/image";
 import axios from "axios";
 import moment from "moment";
 import Sidebar from "@/components/sidebar/Sidebar";
 import { FaShareSquare } from "react-icons/fa";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function ViewRequests() {
   const [requests, setRequests] = useState([]);
@@ -14,7 +14,7 @@ export default function ViewRequests() {
 
   useEffect(() => {
     const fetchRequests = async () => {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("authToken");
 
       if (!token) {
         router.push("/admin/login");
@@ -22,9 +22,14 @@ export default function ViewRequests() {
       }
 
       try {
-        const response = await axios.get("http://localhost:5001/admin/requests", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const response = await axios.get(
+          "http://localhost:5001/admin/requests",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
         setRequests(response.data);
       } catch (error) {
         console.error("Error fetching requests:", error);
@@ -49,25 +54,25 @@ export default function ViewRequests() {
         </div>
 
         {loading ? (
-          <div className="text-center">
-            <p className="text-gray-600">Loading...</p>
+          <div className="flex justify-center items-center h-64">
+            <div className="border-gray-300 h-10 w-10 animate-spin rounded-full border-8 border-t-blue-600" />
           </div>
         ) : requests.length === 0 ? (
           <div className="text-center text-gray-600">
             No requests found.
           </div>
         ) : (
-          <div className="bg-white shadow overflow-auto rounded">
+          <div className="bg-white shadow overflow-auto rounded max-h-96">
             <div className="max-w-4xl">
-              <table className="table-auto w-full">
-                <thead className="bg-indigo-600 text-white">
+              <table className="table-auto w-full shadow-lg">
+                <thead className="bg-indigo-600 text-white sticky top-0 z-10">
                   <tr>
                     {[
-                      "No", "Nama", "NIK", "Upload Photo KTP", "Nomor Pengesahan",
-                      "Alamat", "Pekerjaan", "No HP", "Email", "Rincian Informasi",
-                      "Tujuan Permohonan Informasi", "Cara Memperoleh Informasi", 
-                      "Mendapatkan Salinan Informasi", "Cara Mendapatkan Salinan Informasi",
-                      "Status", "Tracking Code", "File URL", "Tanggal", "Action"
+                      "No", "Nama", "NIK", "Upload Photo KTP", "Nomor Pengesahan", "Alamat", "Pekerjaan",
+                      "No HP", "Email", "Rincian Informasi", "Tujuan Permohonan Informasi",
+                      "Cara Memperoleh Informasi", "Mendapatkan Salinan Informasi",
+                      "Cara Mendapatkan Salinan Informasi", "Status", "Tracking Code",
+                      "File URL", "Tanggal", "Action"
                     ].map((header, index) => (
                       <th
                         key={index}
@@ -78,7 +83,7 @@ export default function ViewRequests() {
                     ))}
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+                <tbody className="bg-white">
                   {requests.map((request, index) => (
                     <tr
                       key={`${request.id}-${request.trackingCode}`}
@@ -86,10 +91,8 @@ export default function ViewRequests() {
                     >
                       <td className="px-4 py-2 text-sm font-medium text-gray-900">{index + 1}</td>
                       <td className="px-4 py-2 text-sm text-gray-500">{request.name}</td>
-                      <td className="px-4 py-2 text-sm text-gray-500">{request.nik}</td>
-                      <td className="px-4 py-2 text-sm text-gray-500 truncate">
-                        <Image src={`http://10.10.10.53:5001/getImage/${request.uploadPhotoKTP}`} alt="KTP" width={100} height={100} />
-                      </td>
+                      <td className="px-4 py-2 text-sm text-gray-500">{request.nik}</td>  
+                      <td className="px-4 py-2 text-sm text-gray-500 truncate"><Image src={`http://10.10.10.53:5001/getImage/${request.uploadPhotoKTP}`} alt="KTP" width={100} height={100} /></td>
                       <td className="px-4 py-2 text-sm text-gray-500 truncate">{request.nomorPengesahan}</td>
                       <td className="px-4 py-2 text-sm text-gray-500 truncate">{request.alamat}</td>
                       <td className="px-4 py-2 text-sm text-gray-500 truncate">{request.pekerjaan}</td>
@@ -115,8 +118,8 @@ export default function ViewRequests() {
               </table>
             </div>
           </div>
-        )}  
+        )}
       </div>
-    </div>
-  );
+    </div>
+  );
 }

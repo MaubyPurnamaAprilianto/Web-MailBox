@@ -9,7 +9,7 @@ export default function TrackPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.get(`http://localhost:5001/user/track/${trackingCode}`);
+      const response = await axios.get(`https://gqk2bgt5-5001.asse.devtunnels.ms/user/track/${trackingCode}`);
       setRequest(response.data);
       setError('');
     } catch (err) {

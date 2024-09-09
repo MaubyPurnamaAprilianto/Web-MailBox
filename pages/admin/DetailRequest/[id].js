@@ -23,7 +23,7 @@ const DetailRequest = () => {
   useEffect(() => {
     if (router.isReady && id) {
       const fetchRequestDetails = async () => {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem("authToken");
         if (!token) {
           setError("Token is missing.");
           return;
@@ -53,7 +53,7 @@ const DetailRequest = () => {
 
   const handleRequest = async (status) => {
     setLoading(true);
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("authToken");
     if (!token) {
       setError("Token is missing.");
       setLoading(false);
@@ -63,8 +63,8 @@ const DetailRequest = () => {
     try {
       const url =
         status === "Rejected"
-          ? `http://localhost:5001/admin/delete-request/${id}`
-          : `http://localhost:5001/admin/update-status/${id}`;
+          ?` http:localhost:5001/admin/delete-request/${id}`
+          : `http:localhost:5001/admin/update-status/${id}`;
       const method = status === "Rejected" ? "DELETE" : "PUT";
 
       await axios({
@@ -251,4 +251,4 @@ const DetailRequest = () => {
   );
 };
 
-export default DetailRequest;
+export default DetailRequest;

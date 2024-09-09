@@ -25,7 +25,7 @@ const Track = () => {
 
     try {
       const response = await axios.get(
-        `http://localhost:5001/user/track/${trackingCode}`
+        `https://gqk2bgt5-5001.asse.devtunnels.ms/user/track/${trackingCode}`
       );
       setTrackingResult(response.data);
     } catch (err) {

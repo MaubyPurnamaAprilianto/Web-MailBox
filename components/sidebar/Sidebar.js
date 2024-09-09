@@ -1,13 +1,38 @@
 import Image from "next/image";
 import React from "react";
-import { FaTachometerAlt, FaUser, FaCog, FaDatabase, FaEye, FaArrowLeft, FaUpload } from "react-icons/fa"; // Import Font Awesome icons
+import { FaTachometerAlt, FaDatabase } from "react-icons/fa"; // Import Font Awesome icons
 import { useRouter } from "next/router"; // Import useRouter
 import Link from "next/link";
-
+import Swal from 'sweetalert2'; // Import SweetAlert2
 import LogoDisdik from "../../public/assets/logo-apps/logo-disdik-special-request-for-web.png";
+import { LogoutIcon } from '@heroicons/react/outline';
 
 const Sidebar = () => {
   const router = useRouter(); // Get the current route
+
+  const handleLogout = () => {
+    Swal.fire({
+      title: 'Konfirmasi Logout',
+      text: 'Apakah Anda yakin ingin keluar?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Logout',
+      cancelButtonText: 'Batal',
+      customClass: {
+        container: 'swal2-container',
+        title: 'text-lg font-semibold text-gray-800', // Tailwind CSS for title
+        text: 'text-base text-gray-700', // Tailwind CSS for text
+        confirmButton: 'bg-blue-500 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 mr-2', // Tailwind CSS for confirm button
+        cancelButton: 'bg-gray-500 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75' // Tailwind CSS for cancel button
+      },
+      buttonsStyling: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.removeItem("token");
+        router.push("/admin/login");
+      }
+    });
+  };
 
   return (
     <div className="flex h-screen">
@@ -51,7 +76,7 @@ const Sidebar = () => {
                 Data
               </Link>
             </li>
-            
+            {/* Uncomment and adjust if needed */}
             {/* <li>
               <Link
                 href="/admin/UpdateRequest"
@@ -68,15 +93,12 @@ const Sidebar = () => {
             <li>
               <button
                 type="button"
-                onClick={() => {
-                  localStorage.removeItem("token");
-                  router.push("/admin/login");
-                }}
+                onClick={handleLogout}
                 className={`flex items-center px-4 py-2 w-full rounded-md ${
                   router.pathname === "/" ? "bg-blue-500" : "hover:bg-blue-500"
                 }`}
               >
-                <FaArrowLeft className="mr-3" />
+                <LogoutIcon className="mr-3 h-5 w-5" />
                 Logout
               </button>
             </li>
@@ -86,6 +108,7 @@ const Sidebar = () => {
       </aside>
 
       {/* Mobile Sidebar */}
+      {/* Uncomment and adjust if needed */}
       {/* <div className="md:hidden block bg-gradient-to-r from-[#0071BC] to-[#002F6C] text-white fixed bottom-0 left-0 w-full h-16 z-50">
         <nav className="flex items-center justify-around h-full">
           <ul className="flex items-center justify-around w-full">

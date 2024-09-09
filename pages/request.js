@@ -13,7 +13,7 @@ export default function RequestPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5001/user/request', {
+      const response = await axios.post('https://gqk2bgt5-5001.asse.devtunnels.ms/user/request', {
         name,
         nik,
         email,

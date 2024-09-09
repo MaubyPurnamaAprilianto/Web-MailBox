@@ -25,3 +25,18 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+
+/* globals.css */
+#nprogress .bar {
+  background: white; /* Mengubah warna menjadi putih */
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px white, 0 0 5px white;
+}
+
+#nprogress .spinner-icon {
+  border-top-color: white;
+  border-left-color: white;
+}
