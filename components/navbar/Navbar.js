@@ -2,15 +2,16 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import LogoDisdik from "../../public/assets/logo-apps/logo-disdik-special-request-for-web.png";
 import { FaBars, FaTimes } from "react-icons/fa";
+import { useRouter } from "next/router";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isFixed, setIsFixed] = useState(false);
+  const router = useRouter(); // Hook untuk mendapatkan informasi rute saat ini
 
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 200) {
-        // Change 100 to the scroll position where you want the navbar to become fixed
         setIsFixed(true);
       } else {
         setIsFixed(false);
@@ -19,12 +20,17 @@ const Navbar = () => {
 
     window.addEventListener("scroll", handleScroll);
 
-    // Cleanup the event listener on component unmount
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const getLinkClasses = (path) => {
+    return `text-white py-2 px-4 rounded transition-colors duration-300 ${
+      router.pathname === path ? 'bg-blue-900' : ''
+    }`;
+  };
+
   return (
-    <div className={` bg-gradient-to-r from-[#002F6C] to-[#0071BC] px-7 py-2 w-full z-50 ${isFixed ? 'fixed top-0' : ''}`}>
+    <div className={`bg-gradient-to-r from-[#002F6C] to-[#0071BC] px-7 py-2 w-full z-50 ${isFixed ? 'fixed top-0' : ''}`}>
       <div className="container mx-auto flex items-center justify-between h-14">
         {/* Logo Section */}
         <a href="/" className="flex items-center">
@@ -44,15 +50,15 @@ const Navbar = () => {
             <li>
               <a
                 href="/"
-                className="text-white hover:bg-blue-900 py-2 px-4 rounded transition-colors duration-300"
+                className={getLinkClasses('/')}
               >
                 Home
               </a>
             </li>
             <li>
               <a
-                href="Tracking/track"
-                className="text-white hover:bg-blue-900 py-2 px-4 rounded transition-colors duration-300"
+                href="/Tracking/track"
+                className={getLinkClasses('/Tracking/track')}
               >
                 Tracking
               </a>
@@ -62,23 +68,21 @@ const Navbar = () => {
       </div>
       {/* Mobile Menu Dropdown */}
       <div
-        className={`lg:hidden ${
-          isOpen ? "block" : "hidden"
-        } absolute top-[70px] left-0 w-full h-screen bg-gradient-to-r from-[#002F6C] to-[#0071BC] border-t border-white`}
+        className={`lg:hidden ${isOpen ? "block" : "hidden"} absolute top-[70px] left-0 w-full h-screen bg-gradient-to-r from-[#002F6C] to-[#0071BC] border-t border-white`}
       >
         <ul className="flex flex-col space-y-2 px-4 py-2">
           <li>
             <a
               href="/"
-              className="text-white  py-2 px-4 rounded transition-colors duration-300 block text-left"
+              className={`text-white py-2 px-4 rounded transition-colors duration-300 block text-left ${router.pathname === '/' ? 'bg-blue-900' : ''}`}
             >
               Home
             </a>
           </li>
           <li>
             <a
-              href="Tracking/track"
-              className="text-white  py-2 px-4 rounded transition-colors duration-300 block text-left"
+              href="/Tracking/track"
+              className={`text-white py-2 px-4 rounded transition-colors duration-300 block text-left ${router.pathname === '/Tracking/track' ? 'bg-blue-900' : ''}`}
             >
               Tracking
             </a>

@@ -23,7 +23,7 @@ const DetailRequest = () => {
   useEffect(() => {
     if (router.isReady && id) {
       const fetchRequestDetails = async () => {
-        const token = localStorage.getItem("authToken");
+        const token = localStorage.getItem("token");
         if (!token) {
           setError("Token is missing.");
           return;
@@ -53,33 +53,31 @@ const DetailRequest = () => {
 
   const handleRequest = async (status) => {
     setLoading(true);
-    const token = localStorage.getItem("authToken");
+    const token = localStorage.getItem("token");
     if (!token) {
       setError("Token is missing.");
       setLoading(false);
       return;
     }
-
+  
     try {
-      const url =
-        status === "Rejected"
-          ?` http:localhost:5001/admin/delete-request/${id}`
-          : `http:localhost:5001/admin/update-status/${id}`;
-      const method = status === "Rejected" ? "DELETE" : "PUT";
-
+      const url = `http://localhost:5001/admin/update-status/${id}`;
+      const method = "PUT";
+  
       await axios({
         method,
         url,
         headers: {
           Authorization: `Bearer ${token}`,
         },
-        data: status === "Rejected" ? {} : { status },
+        data: { status }, // Kirim status yang dipilih (Rejected, Approved, dll)
       });
-
+  
+      // Redirect berdasarkan status yang diterima
       if (status === "Rejected") {
         router.push("/admin/view-requests");
       } else if (status === "Approved") {
-        router.push(`/upload-file/${request.trackingCode}`);
+        router.push(`/admin/UploadFile/${request.trackingCode}`);
       } else {
         router.push("/admin/view-requests");
       }
@@ -90,6 +88,7 @@ const DetailRequest = () => {
       setLoading(false);
     }
   };
+  
 
   if (error) {
     return (

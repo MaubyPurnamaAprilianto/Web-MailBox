@@ -14,7 +14,7 @@ export default function ViewRequests() {
 
   useEffect(() => {
     const fetchRequests = async () => {
-      const token = localStorage.getItem("authToken");
+      const token = localStorage.getItem("token");
 
       if (!token) {
         router.push("/admin/login");

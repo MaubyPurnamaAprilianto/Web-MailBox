@@ -19,7 +19,7 @@ const Login = () => {
         password,
       });
       const { token } = response.data;
-      localStorage.setItem("authToken", token);
+      localStorage.setItem("token", token);
       alert("Login successful!");
       router.push("/admin/dashboard");
     } catch (error) {
