@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Highcharts from "highcharts";
+import Highcharts, { color } from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import axios from "axios";
 
@@ -61,6 +61,9 @@ const WeeklyRequestChart = () => {
     },
     title: {
       text: "Request Minggu ini",
+      style: {
+        color: "#2563EB", // This is the Tailwind CSS `text-blue-600` color code in hex.
+      },
     },
     xAxis: {
       categories: [
@@ -104,7 +107,6 @@ const WeeklyRequestChart = () => {
       enabled: false,
     },
   };
-  
 
   return (
     <div className="bg-white shadow-lg rounded-lg p-6 mb-8 max-w-4xl mx-auto">
