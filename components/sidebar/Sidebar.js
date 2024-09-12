@@ -47,7 +47,7 @@ const Sidebar = () => {
       <aside className="w-64 bg-gradient-to-b from-[#1976D2] to-[#0F508F] text-white fixed top-16 left-0 h-full">
         <nav className="px-4 py-6">
           <div className="mb-10">
-            <h1 className="text-2xl font-bold mb-4 text-center">MailBox</h1>
+            <h1 className="text-2xl font-bold mb-4 text-center">LAYANAN PDO</h1>
           </div>
           <ul className="space-y-4">
             <li>

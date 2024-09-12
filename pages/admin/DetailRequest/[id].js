@@ -6,12 +6,11 @@ import {
   FaCheck,
   FaTimes,
   FaSpinner,
-  FaBackspace,
-  FaBackward,
   FaArrowAltCircleLeft,
 } from "react-icons/fa";
 import Sidebar from "../../../components/sidebar/Sidebar"; // Import Sidebar
 import Link from "next/link";
+import Swal from "sweetalert2"; // Import SweetAlert2
 
 const DetailRequest = () => {
   const router = useRouter();
@@ -52,43 +51,83 @@ const DetailRequest = () => {
   }, [router.isReady, id]);
 
   const handleRequest = async (status) => {
-    setLoading(true);
-    const token = localStorage.getItem("token");
-    if (!token) {
-      setError("Token is missing.");
-      setLoading(false);
-      return;
-    }
-  
-    try {
-      const url = `http://localhost:5001/admin/update-status/${id}`;
-      const method = "PUT";
-  
-      await axios({
-        method,
-        url,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        data: { status }, // Kirim status yang dipilih (Rejected, Approved, dll)
+    if (status === "Rejected") {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, reject it!',
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          // Only proceed if the user confirms
+          try {
+            setLoading(true);
+            const token = localStorage.getItem("token");
+            if (!token) {
+              setError("Token is missing.");
+              setLoading(false);
+              return;
+            }
+
+            const url = `http://localhost:5001/admin/update-status/${id}`;
+            await axios.put(
+              url,
+              { status },
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            );
+
+            // Redirect setelah request berhasil
+            router.push("/admin/view-requests");
+            Swal.fire('Rejected!', 'The request has been rejected.', 'success');
+          } catch (err) {
+            console.error(err);
+            setError("An error occurred while processing the request.");
+          } finally {
+            setLoading(false);
+          }
+        }
       });
-  
-      // Redirect berdasarkan status yang diterima
-      if (status === "Rejected") {
-        router.push("/admin/view-requests");
-      } else if (status === "Approved") {
-        router.push(`/admin/UploadFile/${request.trackingCode}`);
-      } else {
-        router.push("/admin/view-requests");
+    } else {
+      try {
+        setLoading(true);
+        const token = localStorage.getItem("token");
+        if (!token) {
+          setError("Token is missing.");
+          setLoading(false);
+          return;
+        }
+
+        const url = `http://localhost:5001/admin/update-status/${id}`;
+        await axios.put(
+          url,
+          { status },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (status === "Approved") {
+          router.push(`/admin/UploadFile/${request.trackingCode}`);
+        } else {
+          router.push("/admin/view-requests");
+        }
+      } catch (err) {
+        console.error(err);
+        setError("An error occurred while processing the request.");
+      } finally {
+        setLoading(false);
       }
-    } catch (err) {
-      console.error(err);
-      setError("An error occurred while processing the request.");
-    } finally {
-      setLoading(false);
     }
   };
-  
 
   if (error) {
     return (
@@ -114,6 +153,7 @@ const DetailRequest = () => {
       {/* Main Content */}
       <div className="ml-64 mt-16 flex-1 bg-gray-100 p-4">
         <div className="relative p-8 bg-white shadow-md rounded-lg mt-6 text-black">
+          {/* Request details */}
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col items-center">
               <div className="w-72 h-40 bg-gray-300 rounded-lg overflow-hidden">
@@ -127,7 +167,7 @@ const DetailRequest = () => {
                   />
                 ) : (
                   <Image
-                    src="/default-image.jpg" // Replace with your fallback image
+                    src="/default-image.jpg"
                     alt="Default Image"
                     layout="responsive"
                     width={224}
@@ -161,6 +201,7 @@ const DetailRequest = () => {
             </div>
           </div>
 
+          {/* Other details */}
           <div className="mt-6">
             <p>
               <strong>Rincian Yang Dibutuhkan:</strong>
@@ -239,10 +280,10 @@ const DetailRequest = () => {
         <div className="mt-6">
           <Link
             href="/admin/view-requests"
-            className="text-blue-500 hover:text-blue-700 border border-blue-500 hover:border-blue-700 rounded px-4 py-2 "
+            className="text-blue-500 hover:text-blue-700 border border-blue-500 hover:border-blue-700 py-2 px-4 rounded inline-flex items-center"
           >
-            <FaArrowAltCircleLeft className="inline-block mr-2" />
-            Back
+            <FaArrowAltCircleLeft className="mr-2" />
+            Back to Requests
           </Link>
         </div>
       </div>
@@ -250,4 +291,4 @@ const DetailRequest = () => {
   );
 };
 
-export default DetailRequest;
+export default DetailRequest;
