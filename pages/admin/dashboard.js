@@ -83,7 +83,7 @@ export default function Dashboard() {
                       </div>
                       <a
                         href={`/admin/DetailRequest/${request.id}`} // Adjust link accordingly
-                        className="text-blue-600"
+                        className="text-blue-600 hover:text-blue-800"
                       >
                         <FaExternalLinkAlt className="text-3xl" />
                       </a>
