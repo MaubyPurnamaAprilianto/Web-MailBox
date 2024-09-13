@@ -3,9 +3,10 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import moment from "moment";
 import Sidebar from "@/components/sidebar/Sidebar";
-import { FaExternalLinkAlt, FaShareSquare } from "react-icons/fa";
+import { FaExternalLinkAlt } from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
+import * as XLSX from "xlsx";
 
 export default function ViewRequests() {
   const [requests, setRequests] = useState([]);
@@ -44,15 +45,55 @@ export default function ViewRequests() {
     fetchRequests();
   }, [router]);
 
+  const exportToExcel = () => {
+    // Define the columns you want to export
+    const worksheetData = requests.map((request) => ({
+      No: requests.indexOf(request) + 1,
+      Nama: request.name,
+      NIK: request.nik,
+      "Upload Photo KTP": request.uploadPhotoKTP,
+      "Nomor Pengesahan": request.nomorPengesahan,  
+      Alamat: request.alamat,
+      Pekerjaan: request.pekerjaan,
+      "No HP": request.noHp,
+      Email: request.email,
+      "Rincian Informasi": request.rincianInformasi,
+      "Tujuan Permohonan Informasi": request.tujuanPermohonanInformasi,
+      "Cara Memperoleh Informasi": request.caraMemperolehInformasi,
+      "Mendapatkan Salinan Informasi": request.mendapatkanSalinanInformasi,
+      "Cara Mendapatkan Salinan Informasi": request.caraMendapatkanSalinanInformasi,
+      Status: request.status,
+      "Tracking Code": request.trackingCode,
+      "File URL": request.fileUrl,
+      Tanggal: moment(request.createdAt).format("YYYY-MM-DD"),
+    }));
+
+    // Create a new workbook
+    const workbook = XLSX.utils.book_new();
+
+    // Convert worksheet data to Excel format
+    const worksheet = XLSX.utils.json_to_sheet(worksheetData);
+
+    // Append the worksheet to the workbook
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Requests");
+
+    // Generate the Excel file and prompt the user to download
+    XLSX.writeFile(workbook, "Requests.xlsx");
+  };
+
   return (
     <div className="flex min-h-screen bg-gray-50">
       <Sidebar />
       <div className="flex-1 ml-64 mt-16 p-6 md:p-8 bg-gray-50">
         <div className="bg-white p-6 rounded-lg shadow-md">
-          <div className="mb-6">
-            <h1 className="text-3xl font-bold text-gray-800">
-              View Requests
-            </h1>
+          <div className="mb-6 flex justify-between items-center">
+            <h1 className="text-3xl font-bold text-gray-800">View Requests</h1>
+            <button
+              onClick={exportToExcel}
+              className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
+            >
+              Export to Excel
+            </button>
           </div>
 
           {loading ? (
@@ -163,8 +204,8 @@ export default function ViewRequests() {
                           {moment(request.createdAt).format("YYYY-MM-DD")}
                         </td>
                         <td className="px-4 py-2 text-sm text-gray-500 text-center">
-                          <Link href={`/admin/DetailRequest/${request.id}`} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-3 rounded">
-                            <FaExternalLinkAlt className="inline-block  text-lg text-white  cursor-pointer" />
+                          <Link href={`/admin/DetailRequest/${request.id}`} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded inline-flex items-center">
+                            <FaExternalLinkAlt />
                           </Link>
                         </td>
                       </tr>
@@ -176,7 +217,6 @@ export default function ViewRequests() {
           )}
         </div>
       </div>
-         
     </div>
   );
 }
