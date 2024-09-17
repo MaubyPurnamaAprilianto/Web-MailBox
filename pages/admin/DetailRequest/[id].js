@@ -51,83 +51,85 @@ const DetailRequest = () => {
   }, [router.isReady, id]);
 
   const handleRequest = async (status) => {
-    if (status === "Rejected") {
-      Swal.fire({
-        title: 'Are you sure?',
+    const confirmText = {
+      Rejected: {
+        title: "Are you sure?",
         text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#3085d6',
-        confirmButtonText: 'Yes, reject it!',
-      }).then(async (result) => {
-        if (result.isConfirmed) {
-          // Only proceed if the user confirms
-          try {
-            setLoading(true);
-            const token = localStorage.getItem("token");
-            if (!token) {
-              setError("Token is missing.");
-              setLoading(false);
-              return;
-            }
-
-            const url = `http://localhost:5001/admin/update-status/${id}`;
-            await axios.put(
-              url,
-              { status },
-              {
-                headers: {
-                  Authorization: `Bearer ${token}`,
-                },
-              }
-            );
-
-            // Redirect setelah request berhasil
-            router.push("/admin/view-requests");
-            Swal.fire('Rejected!', 'The request has been rejected.', 'success');
-          } catch (err) {
-            console.error(err);
-            setError("An error occurred while processing the request.");
-          } finally {
+        confirmButtonText: "Yes, reject it!",
+        successMessage: "The request has been rejected.",
+        successTitle: "Rejected!",
+        confirmButtonColor: "#d33",
+      },
+      Approved: {
+        title: "Approve this request?",
+        text: "This will approve the request and cannot be undone.",
+        confirmButtonText: "Yes, approve it!",
+        successMessage: "The request has been approved.",
+        successTitle: "Approved!",
+        confirmButtonColor: "#28a745",
+      },
+      Proses: {
+        title: "Proceed with this request?",
+        text: "This will move the request to processing status.",
+        confirmButtonText: "Yes, proceed!",
+        successMessage: "The request is now in processing.",
+        successTitle: "Proses!",
+        confirmButtonColor: "#17a2b8",
+      },
+    };
+  
+    Swal.fire({
+      title: confirmText[status].title,
+      text: confirmText[status].text,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: confirmText[status].confirmButtonColor,
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: confirmText[status].confirmButtonText,
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          setLoading(true);
+          const token = localStorage.getItem("token");
+          if (!token) {
+            setError("Token is missing.");
             setLoading(false);
+            return;
           }
-        }
-      });
-    } else {
-      try {
-        setLoading(true);
-        const token = localStorage.getItem("token");
-        if (!token) {
-          setError("Token is missing.");
+  
+          const url = `http://localhost:5001/admin/update-status/${id}`;
+          await axios.put(
+            url,
+            { status },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+  
+          // Show success message based on the status
+          Swal.fire(
+            confirmText[status].successTitle,
+            confirmText[status].successMessage,
+            "success"
+          );
+  
+          if (status === "Approved") {
+            router.push(`/admin/UploadFile/${request.trackingCode}`);
+          } else {
+            router.push("/admin/view-requests");
+          }
+        } catch (err) {
+          console.error(err);
+          setError("An error occurred while processing the request.");
+        } finally {
           setLoading(false);
-          return;
         }
-
-        const url = `http://localhost:5001/admin/update-status/${id}`;
-        await axios.put(
-          url,
-          { status },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        if (status === "Approved") {
-          router.push(`/admin/UploadFile/${request.trackingCode}`);
-        } else {
-          router.push("/admin/view-requests");
-        }
-      } catch (err) {
-        console.error(err);
-        setError("An error occurred while processing the request.");
-      } finally {
-        setLoading(false);
       }
-    }
+    });
   };
+  
 
   if (error) {
     return (
@@ -238,43 +240,49 @@ const DetailRequest = () => {
             <p>{request.caraMendapatkanSalinanInformasi}</p>
           </div>
 
-          <div className="flex justify-end mt-6">
-            <button
-              className="bg-blue-500 text-white py-2 px-4 rounded mr-2 flex items-center"
-              onClick={() => handleRequest("Proses")}
-              disabled={loading}
-            >
-              {loading ? (
-                <FaSpinner className="mr-2 animate-spin" />
-              ) : (
-                <FaSpinner className="mr-2" />
-              )}
-              Proses
-            </button>
-            <button
-              className="bg-red-500 text-white py-2 px-4 rounded mr-2 flex items-center"
-              onClick={() => handleRequest("Rejected")}
-              disabled={loading}
-            >
-              {loading ? (
-                <FaSpinner className="mr-2 animate-spin" />
-              ) : (
-                <FaTimes className="mr-2" />
-              )}
-              Rejected
-            </button>
-            <button
-              className="bg-green-500 text-white py-2 px-4 rounded flex items-center"
-              onClick={() => handleRequest("Approved")}
-              disabled={loading}
-            >
-              {loading ? (
-                <FaSpinner className="mr-2 animate-spin" />
-              ) : (
-                <FaCheck className="mr-2" />
-              )}
-              Approved
-            </button>
+          <div className="flex justify-between mt-6">
+            <div>
+              <button
+                className="bg-red-500 text-white py-2 px-4 rounded mr-2 flex items-center"
+                onClick={() => handleRequest("Rejected")}
+                disabled={loading}
+              >
+                {loading ? (
+                  <FaSpinner className="mr-2 animate-spin" />
+                ) : (
+                  <FaTimes className="mr-2" />
+                )}
+                Rejected
+              </button>
+            </div>
+
+            <div className="flex items-center">
+              <button
+                className="bg-blue-500 text-white py-2 px-4 rounded mr-2 flex items-center"
+                onClick={() => handleRequest("Proses")}
+                disabled={loading}
+              >
+                {loading ? (
+                  <FaSpinner className="mr-2 animate-spin" />
+                ) : (
+                  <FaSpinner className="mr-2" />
+                )}
+                Proses
+              </button>
+
+              <button
+                className="bg-green-500 text-white py-2 px-4 rounded flex items-center"
+                onClick={() => handleRequest("Approved")}
+                disabled={loading}
+              >
+                {loading ? (
+                  <FaSpinner className="mr-2 animate-spin" />
+                ) : (
+                  <FaCheck className="mr-2" />
+                )}
+                Approved
+              </button>
+            </div>
           </div>
         </div>
         <div className="mt-6">

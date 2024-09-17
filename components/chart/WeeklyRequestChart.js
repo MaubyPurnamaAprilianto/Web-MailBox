@@ -26,7 +26,7 @@ const WeeklyRequestChart = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://gqk2bgt5-5001.asse.devtunnels.ms/admin/requests-per-day",
+          "https://gqk2bgt5-5001.asse.devtunnels.ms/admin/requests-per-week",
           { headers: { Authorization: `Bearer ${token}` } }
         ); // Adjust this URL based on your API endpoint
         const dayCounts = response.data;
@@ -78,7 +78,7 @@ const WeeklyRequestChart = () => {
     },
     yAxis: {
       title: {
-        text: "",
+        text: 'Jumlah Permintaan',
       },
       tickInterval: 10, // This sets the interval of ticks on the y-axis
       min: 0, // Minimum value of y-axis

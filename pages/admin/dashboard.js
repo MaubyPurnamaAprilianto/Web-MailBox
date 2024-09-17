@@ -5,10 +5,14 @@ import WeeklyRequestChart from "../../components/chart/WeeklyRequestChart";
 import RequestStatusChart from "../../components/chart/RequestStatusChart";
 import axios from "axios";
 import { FaExternalLinkAlt } from "react-icons/fa"; // Import the share icon
+import DailyRequestChart from "@/components/chart/DailyRequestChart";
+import MonthlyRequestChart from "@/components/chart/MonthlyRequestChart";
+import YearlyRequestChart from "@/components/chart/YearlyRequestChart";
 
 export default function Dashboard() {
   const router = useRouter();
   const [notifications, setNotifications] = useState([]);
+  const [selectedFilter, setSelectedFilter] = useState("weekly"); // State for selected filter
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -40,6 +44,11 @@ export default function Dashboard() {
     fetchRequests();
   }, [router]);
 
+  // Handler to set selected filter
+  const handleFilterChange = (filter) => {
+    setSelectedFilter(filter);
+  };
+
   return (
     <div className="flex">
       <Sidebar />
@@ -54,8 +63,58 @@ export default function Dashboard() {
         </div>
 
         <div className="p-8 space-y-8">
+          {/* Filter buttons */}
+
           <div className="bg-white shadow-lg rounded-lg p-6">
-            <WeeklyRequestChart />
+            <div className="mb-6 flex justify-center">
+              <div className="flex space-x-4 mb-6">
+                <button
+                  onClick={() => handleFilterChange("daily")}
+                  className={`px-4 py-2 rounded ${
+                    selectedFilter === "daily"
+                      ? "bg-blue-600 text-white"
+                      : "bg-white text-blue-600 border border-blue-600"
+                  }`}
+                >
+                  Daily
+                </button>
+                <button
+                  onClick={() => handleFilterChange("weekly")}
+                  className={`px-4 py-2 rounded ${
+                    selectedFilter === "weekly"
+                      ? "bg-blue-600 text-white"
+                      : "bg-white text-blue-600 border border-blue-600"
+                  }`}
+                >
+                  Weekly
+                </button>
+                <button
+                  onClick={() => handleFilterChange("monthly")}
+                  className={`px-4 py-2 rounded ${
+                    selectedFilter === "monthly"
+                      ? "bg-blue-600 text-white"
+                      : "bg-white text-blue-600 border border-blue-600"
+                  }`}
+                >
+                  Monthly
+                </button>
+                <button
+                  onClick={() => handleFilterChange("yearly")}
+                  className={`px-4 py-2 rounded ${
+                    selectedFilter === "yearly"
+                      ? "bg-blue-600 text-white"
+                      : "bg-white text-blue-600 border border-blue-600"
+                  }`}
+                >
+                  Yearly
+                </button>
+              </div>
+            </div>
+            {/* Conditionally render the selected chart */}
+            {selectedFilter === "daily" && <DailyRequestChart />}
+            {selectedFilter === "weekly" && <WeeklyRequestChart />}
+            {selectedFilter === "monthly" && <MonthlyRequestChart />}
+            {selectedFilter === "yearly" && <YearlyRequestChart />}
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -72,23 +131,30 @@ export default function Dashboard() {
               </h2>
               <ul>
                 {notifications.length > 0 ? (
-                  notifications.slice(0, 5).map((request, index) => ( // Display only 5 notifications
-                    <li
-                      key={index}
-                      className="flex justify-between items-center mb-4 p-4 bg-gray-50 border border-gray-200 rounded-lg"
-                    >
-                      <div>
-                        <p className="font-semibold text-black">{request.name}</p>
-                        <p className="text-gray-500">{request.email}</p>
-                      </div>
-                      <a
-                        href={`/admin/DetailRequest/${request.id}`} // Adjust link accordingly
-                        className="text-blue-600 hover:text-blue-800"
+                  notifications.slice(0, 5).map(
+                    (
+                      request,
+                      index // Display only 5 notifications
+                    ) => (
+                      <li
+                        key={index}
+                        className="flex justify-between items-center mb-4 p-4 bg-gray-50 border border-gray-200 rounded-lg"
                       >
-                        <FaExternalLinkAlt className="text-3xl" />
-                      </a>
-                    </li>
-                  ))
+                        <div>
+                          <p className="font-semibold text-black">
+                            {request.name}
+                          </p>
+                          <p className="text-gray-500">{request.email}</p>
+                        </div>
+                        <a
+                          href={`/admin/DetailRequest/${request.id}`} // Adjust link accordingly
+                          className="text-blue-600 hover:text-blue-800"
+                        >
+                          <FaExternalLinkAlt className="text-3xl" />
+                        </a>
+                      </li>
+                    )
+                  )
                 ) : (
                   <li className="text-gray-500">No notifications available.</li>
                 )}

@@ -21,7 +21,7 @@ const Login = () => {
     NProgress.start();
 
     try {
-      const response = await axios.post('https://gqk2bgt5-5001.asse.devtunnels.ms/admin/login', { email, password });
+      const response = await axios.post('http://localhost:5001/admin/login', { email, password });
       localStorage.setItem('token', response.data.token);
       router.push('/admin/dashboard');
     } catch (err) {
