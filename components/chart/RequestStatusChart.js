@@ -81,6 +81,9 @@ const RequestStatusChart = () => {
         },
       },
     },
+    credits: {
+      enabled: false, // Disable the "highcharts.com" text
+    },
     series: [
       {
         name: 'Status',
@@ -89,6 +92,7 @@ const RequestStatusChart = () => {
       },
     ],
   };
+  
 
   return (
     <HighchartsReact highcharts={Highcharts} options={options} />
