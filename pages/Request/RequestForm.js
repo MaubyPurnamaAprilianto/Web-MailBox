@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-
 const RequestForm = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -35,12 +34,12 @@ const RequestForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-  
+
     const formDataToSend = new FormData();
     Object.keys(formData).forEach((key) => {
       formDataToSend.append(key, formData[key]);
     });
-  
+
     try {
       const response = await axios.post(
         "https://gqk2bgt5-5001.asse.devtunnels.ms/user/request",
@@ -53,8 +52,10 @@ const RequestForm = () => {
         text: "Terima kasih telah mengajukan permohonan informasi.",
         icon: "success",
         confirmButtonText: "OK",
+      }).then(() => {
+        // Reload the page after the user clicks "OK"
+        window.location.reload();
       });
-      window.location.reload();
     } catch (error) {
       console.error("Error submitting form:", error);
       setMessage("Terjadi kesalahan saat mengirim permintaan.");
@@ -68,7 +69,6 @@ const RequestForm = () => {
       setLoading(false);
     }
   };
-  
 
   return (
     <div className="container mx-auto p-4 text-black pb-10">
