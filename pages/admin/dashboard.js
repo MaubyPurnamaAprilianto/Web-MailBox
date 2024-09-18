@@ -4,7 +4,13 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import WeeklyRequestChart from "../../components/chart/WeeklyRequestChart";
 import RequestStatusChart from "../../components/chart/RequestStatusChart";
 import axios from "axios";
-import { FaBell, FaChartArea, FaChartBar, FaChartPie, FaExternalLinkAlt } from "react-icons/fa"; // Import the share icon
+import {
+  FaBell,
+  FaChartArea,
+  FaChartBar,
+  FaChartPie,
+  FaExternalLinkAlt,
+} from "react-icons/fa"; // Import the share icon
 import DailyRequestChart from "@/components/chart/DailyRequestChart";
 import MonthlyRequestChart from "@/components/chart/MonthlyRequestChart";
 import YearlyRequestChart from "@/components/chart/YearlyRequestChart";
@@ -62,7 +68,7 @@ export default function Dashboard() {
 
           const process = total - approved - pending - rejected;
 
-          setRequestStats({ total, approved, pending, rejected , process });
+          setRequestStats({ total, approved, pending, rejected, process });
         } else {
           console.error("Unexpected response structure:", response.data);
         }
@@ -94,79 +100,58 @@ export default function Dashboard() {
 
         <div className="p-8 space-y-8">
           {/* Card for request statistics */}
-          <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-            <div className="bg-blue-500 shadow-lg rounded-lg p-6">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex w-full flex-col items-center space-x-4">
-                  <div className="mr-4">
-                    <i className="fas fa-file-alt text-3xl text-blue-600"></i>
-                  </div>
-                  <div className="text-white">
-                    <p className="mb-2">Total Data Request</p>
-                    <div className="bg-blue-500 shadow-lg rounded-lg p-6 w-60 h-28 flex items-center justify-center">
-                      <p className="text-2xl font-bold">
-                        {requestStats.total}{" "}
-                        <span className="text-sm">Requests </span>
-                      </p>
-                    </div>
-                  </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {/* Total Data Request Card */}
+            <div className="bg-blue-500 shadow-lg rounded-lg p-5">
+              <div className=" items-center space-y-4">
+                <p className="text-white text-[13px] text-center">Total Data Request</p>
+                <div className="bg-blue-500 shadow-lg rounded-lg p-4  text-white w-full h-22 flex items-center justify-center">
+                  <p className="text-xl font-bold">
+                    {requestStats.total}{" "}
+                    <span className="text-sm">Request </span>
+                  </p>
                 </div>
               </div>
             </div>
-            <div className="bg-white shadow-lg rounded-lg p-6">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex w-full flex-col items-center space-x-4">
-                  <div className="">
-                    <p className="text-gray-600 mb-2">
-                      Data Request Sudah Di Layani
-                    </p>
-                    <div className="bg-white shadow-lg rounded-lg p-6 text-black w-60 h-28 flex items-center justify-center">
-                      <p className="text-2xl font-bold">
-                        {requestStats.approved}{" "}
-                        <span className="text-sm">Dari</span>
-                        {requestStats.total}{" "}
-                        <span className="text-sm"> Requests </span>
-                      </p>
-                    </div>
-                  </div>
+
+            {/* Data Request Sudah Di Layani Card */}
+            <div className="bg-white shadow-lg rounded-lg p-5">
+              <div className=" items-center space-y-4">
+                <p className="text-gray-600 text-[13px] text-center">Data Request Sudah Di Layani</p>
+                <div className="bg-white shadow-lg rounded-lg p-4  text-black w-full h-22 flex items-center justify-center">
+                  <p className="text-xl font-bold">
+                    {requestStats.approved}{" "}
+                    <span className="text-sm">Dari</span> {requestStats.total}{" "}
+                    <span className="text-sm">Requests</span>
+                  </p>
                 </div>
               </div>
             </div>
-            <div className="bg-white shadow-lg rounded-lg p-6">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex w-full flex-col items-center space-x-4">
-                  <div className="">
-                    <p className="text-gray-600 mb-2">
-                      Data Request Belum Di Layani
-                    </p>
-                    <div className="bg-white shadow-lg rounded-lg p-6 text-black w-60 h-28 flex items-center justify-center">
-                      <p className="text-2xl font-bold">
-                        {requestStats.pending + requestStats.process}{" "}
-                        <span className="text-sm">Dari</span>{" "}
-                        {requestStats.total}{" "}
-                        <span className="text-sm">Requests</span>
-                      </p>
-                    </div>
-                  </div>
+
+            {/* Data Request Belum Di Layani Card */}
+            <div className="bg-white shadow-lg rounded-lg p-5">
+              <div className="items-center space-y-4">
+                <p className="text-gray-600 text-[13px] text-center">Data Request Belum Di Layani</p>
+                <div className="bg-white shadow-lg rounded-lg p-4 text-black w-full h-22 flex items-center justify-center">
+                  <p className="text-xl font-bold">
+                    {requestStats.pending + requestStats.process}{" "}
+                    <span className="text-sm">Dari</span> {requestStats.total}{" "}
+                    <span className="text-sm">Requests</span>
+                  </p>
                 </div>
               </div>
             </div>
-            <div className="bg-white shadow-lg rounded-lg p-6">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex w-full flex-col items-center space-x-4">
-                  <div className="">
-                    <p className="text-gray-600 mb-2">
-                      Data Request Tidak Di Layani
-                    </p>
-                    <div className="bg-white shadow-lg rounded-lg p-6 text-black w-60 h-28 flex items-center justify-center">
-                      <p className="text-2xl font-bold">
-                        {requestStats.rejected}{" "}
-                        <span className="text-sm">Dari</span>
-                        {requestStats.total}{" "}
-                        <span className="text-sm">Requests</span>
-                      </p>
-                    </div>
-                  </div>
+
+            {/* Data Request Tidak Di Layani Card */}
+            <div className="bg-white shadow-lg rounded-lg p-5">
+              <div className="items-center space-y-4">
+                <p className="text-gray-600 text-[13px] text-center">Data Request Tidak Di Layani</p>
+                <div className="bg-white shadow-lg rounded-lg p-4 text-black w-full h-22 flex items-center justify-center">
+                  <p className="text-xl font-bold">
+                    {requestStats.rejected}{" "}
+                    <span className="text-sm">Dari</span> {requestStats.total}{" "}
+                    <span className="text-sm">Requests</span>
+                  </p>
                 </div>
               </div>
             </div>
@@ -174,7 +159,7 @@ export default function Dashboard() {
         </div>
 
         {/* Other sections */}
-        <div className="p-8 space-y-8">
+        <div className="px-8 space-y-8">
           {/* Filter buttons */}
           <div className="bg-white shadow-lg rounded-lg p-6">
             <div className="mb-6 flex justify-center">
@@ -233,7 +218,7 @@ export default function Dashboard() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div className="bg-white shadow-lg rounded-lg p-6">
               <h2 className="text-xl font-bold mb-4 text-blue-600 flex items-center gap-2">
-                <FaChartPie  className="text-3xl bg"/>
+                <FaChartPie className="text-3xl bg" />
                 Status Request
               </h2>
               <RequestStatusChart />
